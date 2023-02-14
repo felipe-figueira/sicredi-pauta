@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/sicredi
+      uri: mongodb://localhost:30000/sicredi
       auto-index-creation: true

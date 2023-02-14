@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
 @ToString
+@Builder
 public class ErrorResponse implements Serializable {
   private static final long serialVersionUID = 7558200410892344530L;
   private String code;

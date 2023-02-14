@@ -1,17 +1,45 @@
 package com.sicredi.domain.exception;
 
+import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 
 @ControllerAdvice
-public class ExceptionControllerHandler extends ResponseEntityExceptionHandler {
-/*
-  private static final Logger LOG = LoggerFactory.getLogger(ExceptionControllerHandler.class);
+@AllArgsConstructor
+public class ExceptionControllerHandler {
 
-  @ExceptionHandler(value = ParticipantsServerErrorException.class)
-  public ResponseEntity<ErrorResponseBody> findParticipantsExceptions(ParticipantsServerErrorException participantsServerErrorException) {
-    participantsServerErrorException.getErrorResponses().forEach(err -> LOG.error("Find participants error: {}", err));
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseBody(participantsServerErrorException.getErrorResponses(), new Meta()));
-  }
-*/
+	private static final Logger LOG = LoggerFactory.getLogger(ExceptionControllerHandler.class);
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ErrorResponse> pautaNaoEncntrada() {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.builder()
+			.title("Pauta não encontrada")
+			.detail("Id da pauta não existe ou está incorreto")
+			.code("404")
+			.build());
+	}
+
+	@ExceptionHandler(PautaException.class)
+	public ResponseEntity<ErrorResponse> pautaExpirada() {
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.builder()
+			.title("Pauta não diponível")
+			.detail("Pauta não diponível para voto")
+			.code("403")
+			.build());
+	}
+
+	@ExceptionHandler(VotoException.class)
+	public ResponseEntity<ErrorResponse> votoAssociadoJaComputado() {
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.builder()
+			.title("Voto já computado")
+			.detail("Associado já votou nessa pauta")
+			.code("403")
+			.build());
+	}
+
 }

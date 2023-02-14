@@ -3,10 +3,16 @@ package com.sicredi.domain.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sicredi.domain.model.enums.StatusPauta;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class SessaoResponse {
 

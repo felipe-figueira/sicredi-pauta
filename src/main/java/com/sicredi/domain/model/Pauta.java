@@ -1,29 +1,37 @@
 package com.sicredi.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sicredi.domain.model.enums.StatusPauta;
+import java.time.LocalDateTime;
 import java.util.Set;
-import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Document(collection = "pauta")
+@EqualsAndHashCode
 public class Pauta {
 
-  @Id
+  @MongoId
   private String id;
 
-  @Builder.Default
-  private StatusPauta status = StatusPauta.AGUARDANDO_VOTACAO;
+  private StatusPauta status;
 
-  @NotBlank
   private String titulo;
 
-  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  private LocalDateTime horarioLimiteVoto;
+
+  private LocalDateTime horarioInicio;
+
   Set<Voto> votos;
 
 }

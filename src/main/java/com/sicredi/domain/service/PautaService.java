@@ -6,4 +6,6 @@ public interface PautaService {
 
   PautaDto criarPauta (PautaDto pautaDto);
 
+  void atualizarStatusPauta();
+
 }
