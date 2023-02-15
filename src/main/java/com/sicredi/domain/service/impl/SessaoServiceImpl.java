@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class SessaoServiceImpl implements SessaoService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(SessaoService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SessaoServiceImpl.class);
 	private final PautaRepository pautaRepository;
 
 	@Override

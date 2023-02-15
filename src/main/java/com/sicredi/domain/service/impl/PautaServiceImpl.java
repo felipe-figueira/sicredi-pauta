@@ -35,6 +35,7 @@ public class PautaServiceImpl implements PautaService {
   @Override
   @Scheduled(fixedDelay = 1000)
   public void atualizarStatusPauta() {
+    LOGGER.info("Atualizando status pautas expiradas");
     Query query = new Query();
     query.addCriteria(Criteria.where("horarioLimiteVoto").lt(LocalDateTime.now()))
       .addCriteria(Criteria.where("status").is(StatusPauta.VOTACAO_ABERTA));
